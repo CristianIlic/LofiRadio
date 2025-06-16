@@ -1,0 +1,143 @@
+#root {
+  max-width: 1280px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: start;
+}
+
+.media-button {
+  background: none;
+  border: none;
+  padding: 0;
+  transition: transform 0.3s ease-in;
+  &&:hover {
+    transform: scale(1.1);
+  }
+
+  &&:focus {
+    outline: none;
+  }
+}
+
+.ytCustomPlayer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background-color: black;
+  opacity: 1;
+}
+
+.iframeWrapper {
+  position: absolute;
+  top: -40%;
+  left: -40%;
+  width: 180vw;
+  height: 180vh;
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+.cardContainer {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  line-height: 1.25;
+  max-height: 120px;
+  gap: 1rem;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+
+  img {
+    aspect-ratio: 16/9;
+    width: 200px;
+    object-fit: cover;
+    border-radius: 1rem;
+    transition: box-shadow 0.3s ease-in-out;
+  }
+
+  h1,
+  h3,
+  p {
+    margin: 0;
+  }
+
+  h1 {
+    font-size: 1.25rem;
+  }
+
+  p {
+    font-size: 0.8rem;
+    color: var(--secondary-text);
+  }
+
+  h3 {
+    font-size: 1rem;
+    color: var(--secondary-text);
+  }
+}
+
+.cardContainer:hover {
+  transform: scale(1.02);
+
+  img {
+    box-shadow: 0 4px 16px 0 black;
+  }
+}
+
+.radioInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  max-width: 300px;
+}
+
+.mediaContainer {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  display: flex;
+  justify-content: space-around;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 1.75rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 30px 10px rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+}
+
+.leftContainer {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  left: 5%;
+  bottom: 10%;
+  width: 20vw;
+  height: 70vh;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  gap: 3rem;
+  box-shadow: 0 0 30px 4px rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+}
+
+@media only screen and (max-width: 1750px) {
+  .cardContainer {
+    flex-direction: column;
+    padding-bottom: 10px;
+    img {
+      width: 100%;
+    }
+  }
+
+  .leftContainer {
+    gap: 20%;
+  }
+}
