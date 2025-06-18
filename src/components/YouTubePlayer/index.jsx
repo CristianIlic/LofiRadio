@@ -1,10 +1,10 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import YouTube from "react-youtube";
 import { useStore } from "../../utils/store";
 
-function YouTubePlayer({ video }) {
+function YouTubePlayer() {
   const playerRef = useRef(null);
-  const { selectedVideo } = useStore();
+  const { hasInteracted, selectedVideo, setPlayer } = useStore();
 
   if (!selectedVideo) return null;
 
@@ -12,7 +12,7 @@ function YouTubePlayer({ video }) {
     height: "100%",
     width: "100%",
     playerVars: {
-      autoplay: 1,
+      autoplay: hasInteracted ? 1 : 0,
       mute: 0,
       controls: 0,
       modestbranding: 1,
@@ -23,22 +23,13 @@ function YouTubePlayer({ video }) {
   const onReady = (event) => {
     playerRef.current = event.target;
     event.target.playVideo();
-  };
 
-  const handlePlay = () => {
-    playerRef.current?.playVideo();
-  };
+    const iframe = event.target.getIframe();
+    if (iframe) {
+      iframe.setAttribute("tabindex", "-1");
+    }
 
-  const handlePause = () => {
-    playerRef.current?.pauseVideo();
-  };
-
-  const handleMute = () => {
-    playerRef.current?.mute();
-  };
-
-  const handleUnmute = () => {
-    playerRef.current?.unMute();
+    setPlayer(event.target);
   };
 
   return (
