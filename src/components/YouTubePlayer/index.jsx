@@ -4,7 +4,15 @@ import { useStore } from "../../utils/store";
 
 function YouTubePlayer() {
   const playerRef = useRef(null);
-  const { hasInteracted, selectedVideo, setPlayer } = useStore();
+  const { hasInteracted, isContainerOpen, selectedVideo, setPlayer } =
+    useStore();
+
+  useEffect(() => {
+    const wrapper = document.getElementsByClassName("iframeWrapper")[0];
+    if (wrapper) {
+      wrapper.style.opacity = isContainerOpen ? 0.1 : 0.7;
+    }
+  }, [isContainerOpen]);
 
   if (!selectedVideo) return null;
 

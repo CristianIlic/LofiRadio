@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import RadioCard from "../RadioCard";
 import { fetchYT } from "../../utils/fetchYT";
 import { useStore } from "../../utils/store";
-import YouTubePlayer from "../YouTubePlayer";
 
 function LeftSidebar() {
   const [videos, setVideos] = useState([]);
