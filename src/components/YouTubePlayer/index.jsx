@@ -4,8 +4,23 @@ import { useStore } from "../../utils/store";
 
 function YouTubePlayer() {
   const playerRef = useRef(null);
-  const { hasInteracted, isContainerOpen, selectedVideo, setPlayer } =
-    useStore();
+  const {
+    hasInteracted,
+    isContainerOpen,
+    selectedVideo,
+    setPlayer,
+    isBackgroundEnabled,
+    setIsBackgroundEnabled,
+    setVideoTitle,
+  } = useStore();
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "t") {
+      console.log("isBackgroundEnabled", isBackgroundEnabled);
+      const ytPlayer = document.getElementsByClassName("ytCustomPlayer")[0];
+      ytPlayer.style.opacity = 0;
+    }
+  });
 
   useEffect(() => {
     const wrapper = document.getElementsByClassName("iframeWrapper")[0];
@@ -38,6 +53,7 @@ function YouTubePlayer() {
     }
 
     setPlayer(event.target);
+    setVideoTitle(event.target.videoTitle);
   };
 
   return (

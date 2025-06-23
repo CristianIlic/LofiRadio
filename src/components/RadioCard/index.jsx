@@ -1,4 +1,5 @@
 import React from "react";
+import { formatNumber, truncateText } from "../../utils/functions";
 
 function RadioCard({
   title,
@@ -9,17 +10,6 @@ function RadioCard({
   className,
   ...props
 }) {
-  function truncateText(text, maxLength) {
-    if (text.length <= maxLength) {
-      return text;
-    }
-    return text.slice(0, maxLength) + "...";
-  }
-
-  function formatNumber(number) {
-    const formattedNumber = Number(number).toLocaleString();
-    return formattedNumber;
-  }
   const truncTitle = truncateText(title, 30);
 
   return (
