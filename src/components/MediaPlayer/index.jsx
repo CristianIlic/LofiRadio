@@ -12,6 +12,8 @@ function MediaPlayer() {
     isPlaying,
     isMuted,
     videoTitle,
+    prevVideo,
+    nextVideo,
   } = useStore();
 
   const [volume, setLocalVolume] = useState(50);
@@ -27,7 +29,7 @@ function MediaPlayer() {
   return (
     <div className="mediaContainer">
       <div className="buttons">
-        <button className="media-button" onClick={unmuteVideo}>
+        <button className="media-button" onClick={prevVideo}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="48"
@@ -67,7 +69,7 @@ function MediaPlayer() {
           </button>
         )}
 
-        <button className="media-button" onClick={muteVideo}>
+        <button className="media-button" onClick={nextVideo}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="48"

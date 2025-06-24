@@ -9,6 +9,20 @@ export const useStore = create((set, get) => ({
   selectedVideo: 'jfKfPfyJRdk',
   selectedPlayer: null,
   videoTitle: null,
+  videoList: [],
+  selectedVideoIndex: 0,
+
+  setVideoList: (videos) => {
+    set({ videoList: videos })
+  },
+
+  setSelectedVideoIndex: (index) => {
+    const video = get().videoList[index];
+    if (video) {
+      set({ selectedVideoIndex: index, selectedVideo: video });
+    }
+  },
+
   setHasInteracted: () => set({ hasInteracted: true }),
   setSelectedVideo: (id) => set({ selectedVideo: id }),
   setVideoTitle: (title) => set({ videoTitle: title }),
@@ -38,6 +52,22 @@ export const useStore = create((set, get) => ({
     const player = get().selectedPlayer;
     player?.unMute();
     set({isMuted: false});
+  },
+
+  nextVideo: () => {
+    const { selectedVideoIndex, videoList } = get();
+    const nextIndex = selectedVideoIndex + 1;
+    if (nextIndex < videoList.length) {
+      get().setSelectedVideoIndex(nextIndex);
+    }
+  },
+
+  prevVideo: () => {
+    const { selectedVideoIndex } = get();
+    const prevIndex = selectedVideoIndex - 1;
+    if (prevIndex >= 0) {
+      get().setSelectedVideoIndex(prevIndex);
+    }
   },
 
   setVolume: (value) => {

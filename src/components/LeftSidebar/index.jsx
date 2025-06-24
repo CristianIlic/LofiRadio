@@ -12,6 +12,7 @@ function LeftSidebar() {
     setSelectedVideo,
     isContainerOpen,
     setIsContainerOpen,
+    setVideoList,
   } = useStore();
 
   const handleSlideOpen = () => {
@@ -36,7 +37,7 @@ function LeftSidebar() {
 
   useEffect(() => {
     const videoIds = ["jfKfPfyJRdk", "xORCbIptqcc", "IC38LWnquWw"];
-
+    setVideoList(videoIds);
     const fetchData = async () => {
       const data = await fetchYT(videoIds);
       setVideos(data);
@@ -46,7 +47,6 @@ function LeftSidebar() {
   }, []);
 
   if (videos.length === 0) return <div id="leftContainer">Cargando...</div>;
-
   return (
     <>
       <div id="leftContainer">
