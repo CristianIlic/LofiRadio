@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useStore } from "../../utils/store";
 import { truncateText } from "../../utils/functions";
+import useIsMobile from "../../hooks/useIsMobile";
 
 function MediaPlayer() {
   const {
@@ -17,7 +18,7 @@ function MediaPlayer() {
   } = useStore();
 
   const [volume, setLocalVolume] = useState(50);
-
+  const isMobile = useIsMobile();
   const handleVolumeChange = (e) => {
     const value = parseInt(e.target.value);
     setLocalVolume(value);
@@ -82,30 +83,31 @@ function MediaPlayer() {
           </svg>
         </button>
 
-        {isMuted ? (
-          <button className="media-button" onClick={unmuteVideo}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="48"
-              height="48"
-              fill="currentColor"
-              class="bi bi-volume-mute-fill"
-              viewBox="0 0 16 16"
-            >
-              <path d="M6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06m7.137 2.096a.5.5 0 0 1 0 .708L12.207 8l1.647 1.646a.5.5 0 0 1-.708.708L11.5 8.707l-1.646 1.647a.5.5 0 0 1-.708-.708L10.793 8 9.146 6.354a.5.5 0 1 1 .708-.708L11.5 7.293l1.646-1.647a.5.5 0 0 1 .708 0" />
-            </svg>
-          </button>
-        ) : (
-          <input
-            className="media-button"
-            type="range"
-            min="0"
-            max="100"
-            value={volume}
-            onChange={handleVolumeChange}
-            style={{ width: "60px" }}
-          />
-        )}
+        {!isMobile &&
+          (isMuted ? (
+            <button className="media-button" onClick={unmuteVideo}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="48"
+                height="48"
+                fill="currentColor"
+                class="bi bi-volume-mute-fill"
+                viewBox="0 0 16 16"
+              >
+                <path d="M6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06m7.137 2.096a.5.5 0 0 1 0 .708L12.207 8l1.647 1.646a.5.5 0 0 1-.708.708L11.5 8.707l-1.646 1.647a.5.5 0 0 1-.708-.708L10.793 8 9.146 6.354a.5.5 0 1 1 .708-.708L11.5 7.293l1.646-1.647a.5.5 0 0 1 .708 0" />
+              </svg>
+            </button>
+          ) : (
+            <input
+              className="media-button"
+              type="range"
+              min="0"
+              max="100"
+              value={volume}
+              onChange={handleVolumeChange}
+              style={{ width: "60px" }}
+            />
+          ))}
       </div>
       <div className="videoTitle">
         <p>{truncText || ""}</p>
