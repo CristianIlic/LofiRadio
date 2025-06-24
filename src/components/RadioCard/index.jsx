@@ -1,5 +1,6 @@
 import React from "react";
 import { formatNumber, truncateText } from "../../utils/functions";
+import useIsMobile from "../../hooks/useIsMobile";
 
 function RadioCard({
   title,
@@ -10,7 +11,8 @@ function RadioCard({
   className,
   ...props
 }) {
-  const truncTitle = truncateText(title, 30);
+  const isMobile = useIsMobile();
+  const truncTitle = truncateText(title, isMobile ? 18 : 30);
 
   return (
     <div className="cardContainer" {...props}>
