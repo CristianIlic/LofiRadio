@@ -11,6 +11,7 @@ function LeftSidebar() {
     setSelectedVideo,
     isContainerOpen,
     setIsContainerOpen,
+    videoList,
     setVideoList,
   } = useStore();
 
@@ -30,10 +31,8 @@ function LeftSidebar() {
   };
 
   useEffect(() => {
-    const videoIds = ["jfKfPfyJRdk", "xORCbIptqcc", "IC38LWnquWw"];
-    setVideoList(videoIds);
     const fetchData = async () => {
-      const data = await fetchYT(videoIds);
+      const data = await fetchYT(videoList);
       setVideos(data);
     };
 
