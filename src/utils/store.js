@@ -9,7 +9,7 @@ export const useStore = create((set, get) => ({
   selectedVideo: 'jfKfPfyJRdk',
   selectedPlayer: null,
   videoTitle: null,
-  videoList: [],
+  videoList: ["jfKfPfyJRdk", "xORCbIptqcc", "IC38LWnquWw"],
   selectedVideoIndex: 0,
 
   setVideoList: (videos) => {

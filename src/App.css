@@ -2,12 +2,11 @@
   max-width: 1280px;
   height: 100%;
   margin: 0 auto;
-  padding: 2rem;
   text-align: start;
 }
 
 .activeRadio {
-  box-shadow: 0 0 40px 4px purple;
+  box-shadow: 0 0 16px 2px purple;
 }
 
 .media-button {
@@ -41,6 +40,10 @@
   pointer-events: none;
   background-color: black;
   opacity: 1;
+
+  &.hidden {
+    opacity: 0;
+  }
 }
 
 .iframeWrapper {
@@ -124,23 +127,85 @@
   justify-content: space-around;
 }
 
-#leftContainer {
+#topWrapper {
+  transform: translateY(-100%);
+  width: 100vw;
+  overflow: visible;
+}
+
+#topContainer {
+  position: relative;
+  top: 0;
+  overflow: auto hidden;
+  display: flex;
+  anchor-name: --topContainer;
+  flex-direction: row;
+  justify-self: center;
+  width: 80vw;
+  height: 24vh;
+  gap: 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 1.75rem;
+  border-radius: 0 0 0.5rem 0.5rem;
+  box-shadow: 0 0 30px 4px black;
+  backdrop-filter: blur(8px);
+  transition: top 0.3s ease-in-out;
+
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: grey;
+    border-radius: 2rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: purple;
+    border-radius: 2rem;
+  }
+}
+
+#leftWrapper {
   position: absolute;
+  display: flex;
+  align-items: center;
+  left: 0;
+  transform: translateX(-100%);
+  /* background-color: red; */
+  height: 100vh;
+  overflow: visible;
+}
+
+#leftContainer {
+  position: relative;
   anchor-name: --leftContainer;
-  overflow: hidden auto;
+  overflow: hidden scroll;
   display: flex;
   flex-direction: column;
-  left: -25%;
-  bottom: 10%;
   width: 20vw;
-  height: 70vh;
+  height: 80vh;
   background-color: rgba(255, 255, 255, 0.1);
   padding: 1.5rem;
-  border-radius: 1rem;
+  border-radius: 0 0.5rem 0.5rem 0;
   gap: 3rem;
   box-shadow: 0 0 30px 4px black;
   backdrop-filter: blur(8px);
-  transition: left 0.3s ease-in-out, top 0.3s ease-in-out;
+  transition: left 0.3s ease-in-out;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: grey;
+    border-radius: 2rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: purple;
+    border-radius: 2rem;
+  }
 }
 
 #openMenuButton {
@@ -149,16 +214,31 @@
   position-area: center right;
   background: rgba(255, 255, 255, 0.1);
   border: none;
-  border-radius: 100%;
+  border-radius: 50%;
   outline: none;
   margin-left: 3vw;
   padding: 0;
-  transform: translateY(-50%);
   transition: transform 0.3s ease-in-out;
 
   &:hover {
-    transform: scale(1.1) translateY(-50%);
+    transform: scale(1.1);
   }
+}
+
+.slide-in-vertical {
+  animation: slide-vertical 0.3s ease-in-out forwards;
+}
+
+.slide-out-vertical {
+  animation: slide-vertical 0.3s ease-in-out reverse forwards;
+}
+
+.slide-in-horizontal {
+  animation: slide 0.3s ease-in-out forwards;
+}
+
+.slide-out-horizontal {
+  animation: slide 0.3s ease-in-out reverse forwards;
 }
 
 @media only screen and (max-width: 1680px) {
@@ -173,19 +253,6 @@
 }
 
 @media only screen and (max-width: 1000px) {
-  #leftContainer {
-    position: absolute;
-    anchor-name: --leftContainer;
-    overflow: auto hidden;
-    display: flex;
-    flex-direction: row;
-    top: -34%;
-    left: 0;
-    width: 90%;
-    height: 24vh;
-    gap: 1rem;
-    border-radius: 0 0 1rem 1rem;
-  }
   .cardContainer {
     max-width: 250px;
     img {
@@ -195,14 +262,14 @@
   }
 
   #openMenuButton {
-    position: fixed;
-    position-anchor: --leftContainer;
-    position-area: center bottom;
+    position: absolute;
     margin-top: 5vw;
-    transform: translateX(-20%);
+    margin-left: 0;
+    position-anchor: --topContainer;
+    position-area: center bottom;
 
     &:hover {
-      transform: scale(1.1) translateX(-20%);
+      transform: scale(1.1);
     }
   }
 }
@@ -216,7 +283,7 @@
   }
 }
 
-/* @keyframes slide-in {
+@keyframes slide {
   0% {
     -webkit-transform: translateX(-100%);
   }
@@ -225,16 +292,16 @@
   }
 }
 
-@keyframes slide-out {
+/* @keyframes slide-out {
   0% {
     transform: translateX(0%);
   }
   100% {
     transform: translateX(-130%);
   }
-}
+} */
 
-@keyframes slide-in-vertical {
+@keyframes slide-vertical {
   0% {
     -webkit-transform: translateY(-100%);
   }
@@ -243,7 +310,7 @@
   }
 }
 
-@keyframes slide-out-vertical {
+/* @keyframes slide-out-vertical {
   0% {
     transform: translateY(0%);
   }

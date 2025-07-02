@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import YouTube from "react-youtube";
 import { useStore } from "../../utils/store";
 
-function YouTubePlayer() {
+function YouTubePlayer({ hidden }) {
   const playerRef = useRef(null);
   const {
     hasInteracted,
@@ -10,17 +10,8 @@ function YouTubePlayer() {
     selectedVideo,
     setPlayer,
     isBackgroundEnabled,
-    setIsBackgroundEnabled,
     setVideoTitle,
   } = useStore();
-
-  document.addEventListener("keydown", function (event) {
-    if (event.key === "t") {
-      console.log("isBackgroundEnabled", isBackgroundEnabled);
-      const ytPlayer = document.getElementsByClassName("ytCustomPlayer")[0];
-      ytPlayer.style.opacity = 0;
-    }
-  });
 
   useEffect(() => {
     const wrapper = document.getElementsByClassName("iframeWrapper")[0];
@@ -57,7 +48,7 @@ function YouTubePlayer() {
   };
 
   return (
-    <div className="ytCustomPlayer">
+    <div className={`ytCustomPlayer ${hidden ? "hidden" : ""}`}>
       <YouTube
         videoId={selectedVideo}
         opts={opts}

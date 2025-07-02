@@ -3,48 +3,46 @@ import RadioCard from "../RadioCard";
 import { fetchYT } from "../../utils/fetchYT";
 import { useStore } from "../../utils/store";
 
-function LeftSidebar() {
+function TopNavbar() {
   const [videos, setVideos] = useState([]);
-  const leftWrapperRef = useRef();
+  const topWrapperRef = useRef();
   const {
     selectedVideo,
     setSelectedVideo,
     isContainerOpen,
     setIsContainerOpen,
-    setVideoList,
+    videoList,
   } = useStore();
 
   const handleSlide = () => {
-    const container = leftWrapperRef.current;
-    container.classList.remove("slide-in-horizontal");
-    container.classList.remove("slide-out-horizontal");
+    const container = topWrapperRef.current;
+    container.classList.remove("slide-in-vertical");
+    container.classList.remove("slide-out-vertical");
 
     void container.offsetWidth;
 
     if (isContainerOpen) {
-      container.classList.add("slide-out-horizontal");
+      container.classList.add("slide-out-vertical");
     } else {
-      container.classList.add("slide-in-horizontal");
+      container.classList.add("slide-in-vertical");
     }
     setIsContainerOpen(!isContainerOpen);
   };
 
   useEffect(() => {
-    const videoIds = ["jfKfPfyJRdk", "xORCbIptqcc", "IC38LWnquWw"];
-    setVideoList(videoIds);
     const fetchData = async () => {
-      const data = await fetchYT(videoIds);
+      const data = await fetchYT(videoList);
       setVideos(data);
     };
 
     fetchData();
   }, []);
 
-  if (videos.length === 0) return <div id="leftContainer">Cargando...</div>;
+  if (videos.length === 0) return <div id="topContainer">Cargando...</div>;
   return (
     <>
-      <div id="leftWrapper" ref={leftWrapperRef}>
-        <div id="leftContainer">
+      <div id="topWrapper" ref={topWrapperRef}>
+        <div id="topContainer">
           {videos.map((video) => (
             <RadioCard
               key={video.id}
@@ -76,12 +74,12 @@ function LeftSidebar() {
               width="48"
               height="48"
               fill="currentColor"
-              class="bi bi-arrow-right-short"
+              class="bi bi-arrow-down-short"
               viewBox="0 0 16 16"
             >
               <path
                 fill-rule="evenodd"
-                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"
+                d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4"
               />
             </svg>
           )}
@@ -91,4 +89,4 @@ function LeftSidebar() {
   );
 }
 
-export default LeftSidebar;
+export default TopNavbar;
