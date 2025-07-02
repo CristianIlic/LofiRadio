@@ -21,7 +21,7 @@ function App() {
           console.log("Play/Pause");
           // tu lógica de play/pause
           break;
-        case "ArrowRight":
+        case "h":
           {
             setBackgroundIndex((prev) => {
               const next = prev + 1 > MAX_BACKGROUNDS ? 1 : prev + 1;
@@ -30,14 +30,22 @@ function App() {
                 "--background",
                 `url("${imagePath}")`
               );
-
               return next;
             });
           }
           break;
-        case "ArrowLeft":
-          console.log("Canción anterior");
-          // lógica para anterior
+        case "g":
+          {
+            setBackgroundIndex((next) => {
+              const prev = next - 1 < 1 ? MAX_BACKGROUNDS : next - 1;
+              const imagePath = `/background${prev}.gif`;
+              document.documentElement.style.setProperty(
+                "--background",
+                `url("${imagePath}")`
+              );
+              return prev;
+            });
+          }
           break;
 
         case "t":
