@@ -6,7 +6,7 @@
 }
 
 .activeRadio {
-  box-shadow: 0 0 16px 2px purple;
+  animation: purple-breathing 1s infinite alternate;
 }
 
 .media-button {
@@ -59,6 +59,7 @@
 
 .cardContainer {
   display: flex;
+  position: relative;
   line-height: 1.25;
   gap: 1rem;
   cursor: pointer;
@@ -225,6 +226,29 @@
   }
 }
 
+#red-circle {
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+}
+
+#live-badge {
+  display: flex;
+  position: absolute;
+  margin: 0.5rem;
+  top: 0;
+  right: 0;
+  font-size: 0.75rem;
+  background-color: rgba(20, 20, 20, 1);
+  width: max-content;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  align-items: baseline;
+  gap: 0.25rem;
+  animation: pulse 0.75s infinite alternate;
+}
+
 .slide-in-vertical {
   animation: slide-vertical 0.3s ease-in-out forwards;
 }
@@ -292,15 +316,6 @@
   }
 }
 
-/* @keyframes slide-out {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-130%);
-  }
-} */
-
 @keyframes slide-vertical {
   0% {
     -webkit-transform: translateY(-100%);
@@ -310,11 +325,20 @@
   }
 }
 
-/* @keyframes slide-out-vertical {
+@keyframes pulse {
   0% {
-    transform: translateY(0%);
+    -webkit-transform: scale(1);
   }
   100% {
-    transform: translateY(-130%);
+    -webkit-transform: scale(1.05);
   }
-} */
+}
+
+@keyframes purple-breathing {
+  0% {
+    box-shadow: 0 0 4px 2px purple;
+  }
+  100% {
+    box-shadow: 0 0 20px 6px purple;
+  }
+}
