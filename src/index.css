@@ -11,7 +11,7 @@
   background-size: cover;
   background-color: black;
 
-  --background: url("/background2.gif");
+  --background: url("/background1.gif");
   --primary-text: #ffffff;
   --secondary-text: #bbbbbb;
 }
