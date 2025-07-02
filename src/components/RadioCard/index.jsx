@@ -1,6 +1,7 @@
 import React from "react";
 import { formatNumber, truncateText } from "../../utils/functions";
 import useIsMobile from "../../hooks/useIsMobile";
+import LiveBadge from "./LiveBadge";
 
 function RadioCard({
   title,
@@ -13,14 +14,16 @@ function RadioCard({
 }) {
   const isMobile = useIsMobile();
   const truncTitle = truncateText(title, isMobile ? 18 : 30);
-
   return (
     <div className="cardContainer" {...props}>
-      <img className={`${className}`} src={thumbnail} alt="" />
+      <div className="imageContainer">
+        <img className={`${className}`} src={thumbnail} alt="" />
+        {viewers !== 0 ? <LiveBadge /> : ""}
+      </div>
       <div className="radioInfo">
         <div className="topInfo">
           <h1>{truncTitle}</h1>
-          <p>{formatNumber(viewers)} listening</p>
+          <p>{viewers !== 0 ? `${formatNumber(viewers)} listening` : ""}</p>
         </div>
         <div className="bottomInfo">
           <h3>{channel}</h3>
