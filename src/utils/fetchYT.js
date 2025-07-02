@@ -9,13 +9,12 @@ export const fetchYT = async (videoIds = []) => {
 
   const data = await res.json();
   if (!data.items || data.items.length === 0) return [];
-
   return data.items.map((video) => ({
     id: video.id,
     title: video.snippet.title,
     channel: video.snippet.channelTitle,
-    viewers: video.liveStreamingDetails?.concurrentViewers || "0",
-    likes: video.statistics?.likeCount || "0",
+    viewers: video.liveStreamingDetails?.concurrentViewers || 0,
+    likes: video.statistics?.likeCount || 0,
     thumbnail: video.snippet.thumbnails.high?.url ||
            video.snippet.thumbnails.medium?.url ||
            video.snippet.thumbnails.default?.url,
