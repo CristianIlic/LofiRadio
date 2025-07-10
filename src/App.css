@@ -86,6 +86,12 @@
   }
 }
 
+#leftContainer:has(:hover) .cardContainer:not(:hover) {
+  filter: grayscale(1) brightness(0.6);
+  transform: scale(0.95);
+  transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
 .cardContainer:hover {
   transform: scale(1.02);
 
@@ -197,7 +203,7 @@
   gap: 3rem;
   box-shadow: 0 0 30px 4px black;
   backdrop-filter: blur(8px);
-  transition: left 0.3s ease-in-out;
+  transition: filter 0.3s ease-in-out;
 
   &::-webkit-scrollbar {
     width: 6px;
