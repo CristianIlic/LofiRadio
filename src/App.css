@@ -63,7 +63,7 @@
   line-height: 1.25;
   gap: 1rem;
   cursor: pointer;
-  transition: transform 0.3s ease-in-out;
+  transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out;
 
   h1,
   h3,
@@ -89,7 +89,6 @@
 #leftContainer:has(:hover) .cardContainer:not(:hover) {
   filter: grayscale(1) brightness(0.6);
   transform: scale(0.95);
-  transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
 .cardContainer:hover {
