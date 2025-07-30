@@ -1,4 +1,5 @@
 import { create } from "zustand";
+const DEFAULT_VIDEO_LIST = ["jfKfPfyJRdk", "xORCbIptqcc", "IC38LWnquWw", "M3n9irByaLA", "67mNa2T8H3U", "9kzE8isXlQY"]
 
 export const useStore = create((set, get) => ({
   isBackgroundEnabled: true,
@@ -9,11 +10,37 @@ export const useStore = create((set, get) => ({
   selectedVideo: 'jfKfPfyJRdk',
   selectedPlayer: null,
   videoTitle: null,
-  videoList: ["jfKfPfyJRdk", "xORCbIptqcc", "IC38LWnquWw", "M3n9irByaLA", "67mNa2T8H3U", "9kzE8isXlQY"],
+  lastVolume: 50,
+  genre: 'lofi',
+  videoList: DEFAULT_VIDEO_LIST,
+  videoListLofi: DEFAULT_VIDEO_LIST,
+  videoListHiphop: ['lOgEMplYFW0', 'ANS5LPdkSD4', 'xN1YPxdXObI', '9LGnNDdjXRk','86XzuPmMriw',],
+  videoListJazz: ['Dx5qFachd3A','j-tYR6tvtb0','DGTFqaQh26w', 'MYPVQccHhAQ',],
+  videoListTech: ['rSpwqZJJGCM','MoLSQPtyLWE','fYZFcce9VI0', 'IMvHoyUp2Uo', 'tw0n-LNvptI',],
   selectedVideoIndex: 0,
 
-  setVideoList: (videos) => {
-    set({ videoList: videos })
+  setGenre: (genre) => {
+    let videoList;
+    switch (genre) {
+      case 'lofi':
+        videoList = get().videoListLofi;
+        break;
+      case 'hip-hop':
+        videoList = get().videoListHiphop;
+        break;
+      case 'jazz':
+        videoList = get().videoListJazz;
+        break;
+      case 'tech':
+        videoList = get().videoListTech;
+        break;
+      default:
+        videoList = get().videoListLofi;
+        break;
+    }
+
+    set({ genre, videoList })
+    
   },
 
   setSelectedVideoIndex: (index) => {
@@ -72,8 +99,9 @@ export const useStore = create((set, get) => ({
 
   setVolume: (value) => {
     const player = get().selectedPlayer;
+
     player?.setVolume(value);
-    if (value > 0) set({ isMuted: false });
-    else set({ isMuted: true });
+    if (value > 0) set({ isMuted: false,  lastVolume: value });
+    else set({ isMuted: true, lastVolume: 0 });
   },
 }));

@@ -12,7 +12,12 @@ function TopNavbar() {
     isContainerOpen,
     setIsContainerOpen,
     videoList,
+    setGenre,
   } = useStore();
+
+  const handleGenre = (e) => {
+    setGenre(e.target.value);
+  };
 
   const handleSlide = () => {
     const container = topWrapperRef.current;
@@ -36,25 +41,36 @@ function TopNavbar() {
     };
 
     fetchData();
-  }, []);
+  }, [videoList]);
 
   if (videos.length === 0) return <div id="topContainer">Cargando...</div>;
   return (
     <>
       <div id="topWrapper" ref={topWrapperRef}>
         <div id="topContainer">
-          {videos.map((video) => (
-            <RadioCard
-              key={video.id}
-              viewers={video.viewers}
-              title={video.title}
-              likes={video.likes}
-              channel={video.channel}
-              thumbnail={video.thumbnail}
-              onClick={() => setSelectedVideo(video.id)}
-              className={selectedVideo === video.id ? "activeRadio" : ""}
-            />
-          ))}
+          <div className="genre">
+            <p>Género:</p>
+            <select onChange={handleGenre}>
+              <option value="lofi">LoFi</option>
+              <option value="hip-hop">Hip-Hop</option>
+              <option value="jazz">Jazz</option>
+              <option value="tech">Tech</option>
+            </select>
+          </div>
+          <div className="videos">
+            {videos.map((video) => (
+              <RadioCard
+                key={video.id}
+                viewers={video.viewers}
+                title={video.title}
+                likes={video.likes}
+                channel={video.channel}
+                thumbnail={video.thumbnail}
+                onClick={() => setSelectedVideo(video.id)}
+                className={selectedVideo === video.id ? "activeRadio" : ""}
+              />
+            ))}
+          </div>
         </div>
         <button id="openMenuButton" onClick={handleSlide}>
           {isContainerOpen ? (

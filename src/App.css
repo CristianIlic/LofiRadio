@@ -5,6 +5,48 @@
   text-align: start;
 }
 
+.genre {
+  display: flex;
+  position: sticky;
+  justify-content: end;
+  gap: 0.5em;
+
+  align-items: center;
+  p {
+    cursor: default;
+  }
+
+  select {
+    appearance: base-select;
+    border: none;
+    cursor: pointer;
+
+    &::picker-icon {
+      color: #999;
+      transition: 0.4s rotate;
+      rotate: 90deg;
+    }
+
+    &::picker(select) {
+      appearance: base-select;
+      border: none;
+      border-radius: 8px;
+      padding: 0.5em;
+    }
+
+    &:open::picker-icon {
+      rotate: 0deg;
+    }
+
+    option {
+      gap: 10px;
+      padding: 0.25em;
+      transition: 0.4s;
+      border-radius: 4px;
+    }
+  }
+}
+
 .activeRadio {
   animation: purple-breathing 1s infinite alternate;
 }
@@ -64,6 +106,7 @@
   gap: 1rem;
   cursor: pointer;
   transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out;
+  transform: scale(0.9);
 
   h1,
   h3,
@@ -76,23 +119,23 @@
   }
 
   p {
-    font-size: 0.8rem;
+    font-size: 1.1rem;
     color: var(--secondary-text);
   }
 
   h3 {
-    font-size: 1rem;
+    font-size: 0.85rem;
     color: var(--secondary-text);
   }
 }
 
 #leftContainer:has(:hover) .cardContainer:not(:hover) {
   filter: grayscale(1) brightness(0.6);
-  transform: scale(0.95);
+  transform: scale(0.85);
 }
 
 .cardContainer:hover {
-  transform: scale(1.02);
+  transform: scale(0.94);
 
   img {
     box-shadow: 0 4px 16px 0 black;
@@ -100,9 +143,10 @@
 }
 
 .imageContainer {
+  display: flex;
   position: relative;
   max-width: 50%;
-
+  justify-content: center;
   img {
     aspect-ratio: 16/9;
     max-width: 100%;
@@ -145,33 +189,39 @@
 }
 
 #topContainer {
-  position: relative;
-  top: 0;
-  overflow: auto hidden;
   display: flex;
+  position: relative;
+  flex-direction: column;
+  gap: 1em;
+  box-sizing: border-box;
+  overflow: hidden;
   anchor-name: --topContainer;
-  flex-direction: row;
   justify-self: center;
-  width: 80vw;
-  height: 24vh;
-  gap: 1rem;
+  width: 100%;
   background-color: rgba(255, 255, 255, 0.1);
-  padding: 1.75rem;
+  padding: 0.5em;
   border-radius: 0 0 0.5rem 0.5rem;
   box-shadow: 0 0 30px 4px black;
   backdrop-filter: blur(8px);
   transition: top 0.3s ease-in-out;
 
-  &::-webkit-scrollbar {
+  .videos {
+    overflow-x: auto;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  .videos::-webkit-scrollbar {
     height: 6px;
   }
 
-  &::-webkit-scrollbar-track {
+  .videos::-webkit-scrollbar-track {
     background: grey;
     border-radius: 2rem;
   }
 
-  &::-webkit-scrollbar-thumb {
+  .videos::-webkit-scrollbar-thumb {
     background: purple;
     border-radius: 2rem;
   }
@@ -191,29 +241,38 @@
 #leftContainer {
   position: relative;
   anchor-name: --leftContainer;
-  overflow: hidden scroll;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   width: 20vw;
   height: 80vh;
   background-color: rgba(255, 255, 255, 0.1);
-  padding: 1.5rem;
+  padding: 1em;
   border-radius: 0 0.5rem 0.5rem 0;
-  gap: 3rem;
+  gap: 1em;
   box-shadow: 0 0 30px 4px black;
   backdrop-filter: blur(8px);
   transition: filter 0.3s ease-in-out;
 
-  &::-webkit-scrollbar {
+  .videos {
+    overflow-y: auto;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+    padding-right: 0.5rem;
+  }
+
+  .videos::-webkit-scrollbar {
     width: 6px;
   }
 
-  &::-webkit-scrollbar-track {
+  .videos::-webkit-scrollbar-track {
     background: grey;
     border-radius: 2rem;
   }
 
-  &::-webkit-scrollbar-thumb {
+  .videos::-webkit-scrollbar-thumb {
     background: purple;
     border-radius: 2rem;
   }

@@ -11,6 +11,7 @@ function YouTubePlayer({ hidden }) {
     setPlayer,
     isBackgroundEnabled,
     setVideoTitle,
+    lastVolume,
   } = useStore();
 
   useEffect(() => {
@@ -37,7 +38,7 @@ function YouTubePlayer({ hidden }) {
   const onReady = (event) => {
     playerRef.current = event.target;
     event.target.playVideo();
-
+    event.target.setVolume(lastVolume);
     const iframe = event.target.getIframe();
     if (iframe) {
       iframe.setAttribute("tabindex", "-1");

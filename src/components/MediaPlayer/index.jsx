@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { useStore } from "../../utils/store";
 import { truncateText } from "../../utils/functions";
 import useIsMobile from "../../hooks/useIsMobile";
+import CastButton from "../CastButton/CastButton";
 
 function MediaPlayer() {
   const {
     playVideo,
     pauseVideo,
-    muteVideo,
     unmuteVideo,
+    lastVolume,
     setVolume,
     isPlaying,
     isMuted,
@@ -17,11 +18,9 @@ function MediaPlayer() {
     nextVideo,
   } = useStore();
 
-  const [volume, setLocalVolume] = useState(50);
   const isMobile = useIsMobile();
   const handleVolumeChange = (e) => {
     const value = parseInt(e.target.value);
-    setLocalVolume(value);
     setVolume(value);
   };
 
@@ -103,7 +102,7 @@ function MediaPlayer() {
               type="range"
               min="0"
               max="100"
-              value={volume}
+              value={lastVolume}
               onChange={handleVolumeChange}
               style={{ width: "60px" }}
             />
