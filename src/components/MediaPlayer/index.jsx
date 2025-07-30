@@ -2,7 +2,6 @@ import React from "react";
 import { useStore } from "../../utils/store";
 import { truncateText } from "../../utils/functions";
 import useIsMobile from "../../hooks/useIsMobile";
-import CastButton from "../CastButton/CastButton";
 
 function MediaPlayer() {
   const {
