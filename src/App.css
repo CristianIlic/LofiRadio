@@ -167,13 +167,20 @@
   position: absolute;
   bottom: 10%;
   left: 50%;
-  transform: translateX(-50%);
   width: 300px;
   background-color: rgba(255, 255, 255, 0.1);
   padding: 1.75rem 1.75rem 0 1.75rem;
   border-radius: 1rem;
-  box-shadow: 0 0 30px 10px black;
+  box-shadow: 0 0 30px 2px black;
   backdrop-filter: blur(8px);
+  opacity: 0.5;
+  transition: all 0.4s ease;
+  transform: translateX(-50%) scale(0.97);
+
+  &:hover {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
 }
 
 .buttons {
@@ -288,7 +295,7 @@
   outline: none;
   margin-left: 3vw;
   padding: 0;
-  transition: transform 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 
   &:hover {
     transform: scale(1.1);
