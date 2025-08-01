@@ -9,11 +9,10 @@ function LeftSidebar() {
   const leftWrapperRef = useRef();
   const {
     selectedVideo,
-    setSelectedVideo,
+    setSelectedVideoIndex,
     isContainerOpen,
     setIsContainerOpen,
     videoList,
-    genre,
     setGenre,
   } = useStore();
 
@@ -68,7 +67,7 @@ function LeftSidebar() {
                 likes={video.likes}
                 channel={video.channel}
                 thumbnail={video.thumbnail}
-                onClick={() => setSelectedVideo(video.id)}
+                onClick={() => setSelectedVideoIndex(videos.indexOf(video))}
                 className={selectedVideo === video.id ? "activeRadio" : ""}
               />
             ))}

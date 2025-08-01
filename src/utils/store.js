@@ -51,7 +51,6 @@ export const useStore = create((set, get) => ({
   },
 
   setHasInteracted: () => set({ hasInteracted: true }),
-  setSelectedVideo: (id) => set({ selectedVideo: id }),
   setVideoTitle: (title) => set({ videoTitle: title }),
   setIsBackgroundEnabled: (value) => set({ hasInteracted: value }),
   setIsContainerOpen: (value) => set({isContainerOpen: value}),
@@ -86,14 +85,18 @@ export const useStore = create((set, get) => ({
     const nextIndex = selectedVideoIndex + 1;
     if (nextIndex < videoList.length) {
       get().setSelectedVideoIndex(nextIndex);
+    } else {
+      get().setSelectedVideoIndex(0);
     }
   },
 
   prevVideo: () => {
-    const { selectedVideoIndex } = get();
+    const { selectedVideoIndex, videoList } = get();
     const prevIndex = selectedVideoIndex - 1;
     if (prevIndex >= 0) {
       get().setSelectedVideoIndex(prevIndex);
+    } else {
+      get().setSelectedVideoIndex(videoList.length - 1);      
     }
   },
 
