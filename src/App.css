@@ -192,7 +192,6 @@
   display: flex;
   position: relative;
   flex-direction: column;
-  gap: 1em;
   box-sizing: border-box;
   overflow: hidden;
   anchor-name: --topContainer;
@@ -240,6 +239,7 @@
 
 #leftContainer {
   position: relative;
+  margin-left: 50px;
   anchor-name: --leftContainer;
   overflow: hidden;
   display: flex;
@@ -248,7 +248,7 @@
   height: 80vh;
   background-color: rgba(255, 255, 255, 0.1);
   padding: 1em;
-  border-radius: 0 0.5rem 0.5rem 0;
+  border-radius: 0.5em;
   gap: 1em;
   box-shadow: 0 0 30px 4px black;
   backdrop-filter: blur(8px);
