@@ -8,7 +8,7 @@ function TopNavbar() {
   const topWrapperRef = useRef();
   const {
     selectedVideo,
-    setSelectedVideo,
+    setSelectedVideoIndex,
     isContainerOpen,
     setIsContainerOpen,
     videoList,
@@ -66,7 +66,7 @@ function TopNavbar() {
                 likes={video.likes}
                 channel={video.channel}
                 thumbnail={video.thumbnail}
-                onClick={() => setSelectedVideo(video.id)}
+                onClick={() => setSelectedVideoIndex(videos.indexOf(video))}
                 className={selectedVideo === video.id ? "activeRadio" : ""}
               />
             ))}
