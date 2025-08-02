@@ -1,3 +1,7 @@
+html {
+  height: 100%;
+}
+
 :root {
   font-family: Lilita One, sans-serif;
   line-height: 1.5;
@@ -35,7 +39,9 @@
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 h1 {

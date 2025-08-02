@@ -1,8 +1,9 @@
 #root {
   max-width: 1280px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100%;
-  margin: 0 auto;
-  text-align: start;
 }
 
 .genre {
@@ -190,6 +191,8 @@
 }
 
 #topWrapper {
+  position: absolute;
+  top: 0;
   transform: translateY(-100%);
   width: 100vw;
   overflow: visible;
@@ -339,6 +342,23 @@
 
 .slide-out-horizontal {
   animation: slide 0.3s ease-in-out reverse forwards;
+}
+
+#signup-form {
+  background: linear-gradient(to left top, cyan 1%, black 80%);
+  padding: 1.5em;
+  max-width: 480px;
+  border-radius: 0.5em;
+}
+
+.form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+
+  input {
+    padding: 0.5rem;
+  }
 }
 
 @media only screen and (max-width: 1680px) {
