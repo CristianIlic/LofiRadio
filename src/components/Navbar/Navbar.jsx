@@ -13,7 +13,7 @@ function Navbar() {
   return (
     <div className="user-buttons">
       {/* <HomeButton /> */}
-      {user ? <>{/* <ProfileButton /> */}</> : <SignInButton />}
+      {/* {user ? <>{<ProfileButton />}</> : <SignInButton />} */}
       <InfoBox />
     </div>
   );
