@@ -13,7 +13,7 @@ import supabase from "./api/supabase";
 function App() {
   const isMobile = useIsMobile();
   const [hidden, setHidden] = useState(false);
-  const MAX_BACKGROUNDS = 4;
+  const MAX_BACKGROUNDS = 7;
   const [backgroundIndex, setBackgroundIndex] = useState(1);
   const { setUser, setUserData } = useAuthStore();
 
