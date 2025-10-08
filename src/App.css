@@ -106,7 +106,7 @@
   line-height: 1.25;
   gap: 1rem;
   cursor: pointer;
-  transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   transform: scale(0.9);
 
   h1,
@@ -173,7 +173,7 @@
   padding: 1.75rem 1.75rem 0 1.75rem;
   border-radius: 1rem;
   box-shadow: 0 0 30px 2px black;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(4px);
   opacity: 0.5;
   transition: all 0.4s ease;
   transform: translateX(-50%) scale(0.97);
@@ -261,8 +261,11 @@
   border-radius: 0.5em;
   gap: 1em;
   box-shadow: 0 0 30px 4px black;
-  backdrop-filter: blur(8px);
-  transition: filter 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    backdrop-filter: blur(4px);
+  }
 
   .videos {
     overflow-y: auto;
@@ -305,6 +308,10 @@
   }
 }
 
+#openMenuButton svg {
+  display: block;
+}
+
 #red-circle {
   width: 10px;
   height: 10px;
@@ -328,6 +335,19 @@
   animation: pulse 0.75s infinite alternate;
 }
 
+#favorite-icon {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 0.5rem;
+  color: white;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
 .slide-in-vertical {
   animation: slide-vertical 0.3s ease-in-out forwards;
 }
@@ -348,6 +368,32 @@
   background: linear-gradient(to left top, cyan 1%, black 80%);
   padding: 1.5em;
   max-width: 480px;
+  border-radius: 0.5em;
+}
+
+.user-buttons {
+  position: absolute;
+  display: flex;
+  gap: 0.5em;
+  margin: 1em;
+  top: 0;
+  right: 0;
+  button {
+    display: flex;
+    gap: 0.5em;
+    background: none;
+    padding: 0.5em;
+    border: none;
+    transition: transform 0.3s ease;
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+}
+
+.container {
+  background-color: black;
+  padding: 1em;
   border-radius: 0.5em;
 }
 
