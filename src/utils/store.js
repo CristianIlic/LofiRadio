@@ -21,6 +21,7 @@ export const useStore = create((set, get) => ({
 
   setGenre: (genre) => {
     let videoList;
+    const { setSelectedVideoIndex } = get();
     switch (genre) {
       case 'lofi':
         videoList = get().videoListLofi;
@@ -38,9 +39,8 @@ export const useStore = create((set, get) => ({
         videoList = get().videoListLofi;
         break;
     }
-
     set({ genre, videoList })
-    
+    setSelectedVideoIndex(0);
   },
 
   setSelectedVideoIndex: (index) => {
