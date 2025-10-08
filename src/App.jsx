@@ -6,20 +6,22 @@ import LeftSidebar from "./components/LeftSidebar";
 import YouTubePlayer from "./components/YouTubePlayer";
 import useIsMobile from "./hooks/useIsMobile";
 import { useEffect, useState } from "react";
+import Navbar from "./components/Navbar/Navbar";
+import { useAuthStore } from "./utils/store";
+import supabase from "./api/supabase";
 
 function App() {
   const isMobile = useIsMobile();
   const [hidden, setHidden] = useState(false);
   const MAX_BACKGROUNDS = 4;
   const [backgroundIndex, setBackgroundIndex] = useState(1);
+  const { setUser, setUserData } = useAuthStore();
 
   useEffect(() => {
     const handleKeyDown = (event) => {
       switch (event.key) {
         case " ": // espacio
           event.preventDefault(); // evita scroll si se quiere
-          console.log("Play/Pause");
-          // tu lógica de play/pause
           break;
         case "h":
           {
@@ -63,6 +65,36 @@ function App() {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
+
+  useEffect(() => {
+    const initSession = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      setUser(session?.user ?? null);
+
+      if (session) {
+        let { data: users, error } = await supabase
+          .from("users")
+          .select("*")
+          .eq("id", session?.user.id);
+        if (error) throw error;
+        setUserData(users[0]);
+      }
+    };
+
+    initSession();
+
+    const { data: listener } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setUser(session?.user ?? null);
+      }
+    );
+
+    return () => {
+      listener.subscription?.unsubscribe();
+    };
+  }, [setUser, setUserData]);
 
   return (
     <>

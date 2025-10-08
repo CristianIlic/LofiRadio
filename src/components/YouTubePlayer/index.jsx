@@ -9,6 +9,7 @@ function YouTubePlayer({ hidden }) {
     isContainerOpen,
     selectedVideo,
     setPlayer,
+    setIsPlaying,
     isBackgroundEnabled,
     setVideoTitle,
     lastVolume,
@@ -54,6 +55,7 @@ function YouTubePlayer({ hidden }) {
         videoId={selectedVideo}
         opts={opts}
         onReady={onReady}
+        onPlay={() => setIsPlaying(true)}
         className="iframeWrapper"
       />
     </div>

@@ -1,4 +1,6 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
+import { getUsers, addUser } from "../api/users";
 const DEFAULT_VIDEO_LIST = ["jfKfPfyJRdk", "xORCbIptqcc", "IC38LWnquWw", "M3n9irByaLA", "67mNa2T8H3U", "9kzE8isXlQY"]
 
 export const useStore = create((set, get) => ({
@@ -55,6 +57,7 @@ export const useStore = create((set, get) => ({
   setIsBackgroundEnabled: (value) => set({ hasInteracted: value }),
   setIsContainerOpen: (value) => set({isContainerOpen: value}),
   setPlayer: (player) => set({ selectedPlayer: player }),
+  setIsPlaying: (value) => set({isPlaying: value}),
 
   playVideo: () => {
     const player = get().selectedPlayer;
@@ -108,3 +111,37 @@ export const useStore = create((set, get) => ({
     else set({ isMuted: true, lastVolume: 0 });
   },
 }));
+
+export const useUserStore = create((set, get) => ({
+  users: [],
+  loading: false,
+  error: null,
+
+  fetchUsers: async () => {
+    set({ loading: true, error: null });
+    try {
+      const data = await getUsers();
+      set({ users: data, loading: false });
+    } catch (error) {
+      set({ error: error.message, loading: false });
+    }
+  },
+
+  createUser: async (user) => {
+    set({ loading: true })
+    try {
+      const data = await addUser(user)
+      set({ users: [...get().users, ...data], loading: false })
+    } catch (error) {
+      set({ error: error.message, loading: false })
+    }
+  },
+}))
+
+export const useAuthStore = create(persist((set) => ({
+  user: null,
+  userData: null,
+  setUser: (user) => set({ user }),
+  setUserData: (userData) => set({ userData }),
+  clearData: (() => set({user: null, userData: null}))
+})));

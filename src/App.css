@@ -378,17 +378,6 @@
   margin: 1em;
   top: 0;
   right: 0;
-  button {
-    display: flex;
-    gap: 0.5em;
-    background: none;
-    padding: 0.5em;
-    border: none;
-    transition: transform 0.3s ease;
-    &:hover {
-      transform: scale(1.05);
-    }
-  }
 }
 
 .container {

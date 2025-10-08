@@ -24,7 +24,6 @@ function MediaPlayer() {
   };
 
   const truncText = videoTitle ? truncateText(videoTitle, 35) : "";
-
   return (
     <div className="mediaContainer">
       <div className="buttons">
